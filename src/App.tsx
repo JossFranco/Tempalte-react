@@ -1,15 +1,19 @@
 import React from 'react'
 import './App.css'
-import { Button } from './components/atoms/Button/Button'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Login } from './page/Login/Login'
+import { Register } from './page/Register/Register'
+import { Home } from './page/Home/Home'
 
-function App() {
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Onboard Express</h1>
-      </header>
-      <Button color="primary">Hazme click</Button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="Register" element={<Register />} />
+        <Route path="Home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
