@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Login } from './page/Login/Login'
@@ -12,7 +11,10 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Login navigateFunction={navigate} locationFunction={location} />} />
-      <Route path="Register" element={<Register />} />
+      <Route
+        path="Register"
+        element={<Register navigateFunction={navigate} locationFunction={location} />}
+      />
       <Route path="Home" element={<Home />} />
     </Routes>
   )
