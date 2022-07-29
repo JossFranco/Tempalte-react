@@ -17,10 +17,10 @@ export default function Form({ navigateFunction, locationFunction }) {
     setErrorUser('')
     setErrorPwd('')
     setErr('')
-    if (!email) {
+    if (email === '') {
       setErrorUser('Campo es requerido')
     }
-    if (!password) {
+    if (password === '') {
       setErrorPwd('Campo es requerido')
     }
     if (users.includes(email) && pwds.includes(password)) {

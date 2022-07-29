@@ -3,42 +3,45 @@ import { Button } from '../../atoms/Button/Button'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function FormRegister({ navigateFunction, locationFunction }) {
+export default function FormRegister({ navigateFunction }) {
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
+  const [errorEmail, setErrorEmail] = useState('')
   const [password, setPassword] = useState('')
   const [pwdConfirm, setPwdConfirm] = useState('')
+  const [errPwdConfirm, setErrPwdConfirm] = useState('')
   const [errorUser, setErrorUser] = useState('')
   const [errorPwd, setErrorPwd] = useState('')
   const [err, setErr] = useState('')
 
   const handleSubmit = () => {
     setErrorUser('')
+    setErrorEmail('')
     setErrorPwd('')
-    setPwdConfirm('')
+    setErrPwdConfirm('')
     setErr('')
-    if (!errorUser) {
+
+    if (userName === '') {
       setErrorUser('Campo es requerido')
     }
-    if (!email) {
-      setErrorUser('Campo es requerido')
+    if (email === '') {
+      setErrorEmail('Campo es requerido')
     }
-    if (!password) {
+    if (password === '') {
       setErrorPwd('Campo es requerido')
     }
-    if (!pwdConfirm) {
-      setErrorPwd('Campo es requerido')
+    if (pwdConfirm === '') {
+      setErrPwdConfirm('Campo es requerido')
     }
-    if (userName && email && password && pwdConfirm) {
-      alert('Registro exitoso')
+    if (userName && email && password && pwdConfirm && password === pwdConfirm) {
       navigateFunction('/')
     } else {
-      setErr('Los datos son incorrectos')
+      setErr('Las contraseñas no coinciden')
     }
   }
   return (
     <form className="form-register">
-      <label htmlForm="userName">Nombre de usuario</label>
+      <label className="userName">Nombre de usuario</label>
       <input
         onChange={(ev) => setUserName(ev.target.value)}
         type="text"
@@ -48,7 +51,7 @@ export default function FormRegister({ navigateFunction, locationFunction }) {
       />
       <span>{errorUser}</span>
       <br></br>
-      <label htmlForm="userEmail">Correo electronico</label>
+      <label className="userEmail">Correo electronico</label>
       <input
         onChange={(ev) => setEmail(ev.target.value)}
         type="text"
@@ -56,7 +59,7 @@ export default function FormRegister({ navigateFunction, locationFunction }) {
         value={email}
         placeholder="Ej. name@example.com"
       />
-      <span>{errorPwd}</span>
+      <span>{errorEmail}</span>
       <br></br>
       <label htmlFor="userPassword">Contraseña</label>
       <input
@@ -78,7 +81,7 @@ export default function FormRegister({ navigateFunction, locationFunction }) {
         value={pwdConfirm}
         placeholder="*****"
       />
-      <span>{errorPwd}</span>
+      <span>{errPwdConfirm}</span>
       <br></br>
       <div className="optionLogin">
         <Link to={'/'}> Iniciar sesión </Link>

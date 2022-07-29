@@ -1,0 +1,8 @@
+.form-navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #CEE5D0;
+}
+.title{
+    margin: 20px 20px 20px 20px;
+}
