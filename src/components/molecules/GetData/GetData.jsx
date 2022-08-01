@@ -1,28 +1,38 @@
+import Axios from 'axios'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import './GetData.css'
 
 export const GetData = () => {
-  const [name, setName] = useState({})
   const [search, setSearch] = useState('')
-
-  const URL = 'https://cangular-api.herokuapp.com/books/owner/2ac4ly00oen'
-
+  const [books, setBooks] = useState([])
   const getBooks = async () => {
-    const response = await fetch(URL)
-    const data = await response.json()
-    console.log(data)
-    setName(data)
+    try {
+      console.log('entro')
+      const URL = 'https://cangular-api.herokuapp.com/books/filter'
+      const body = {
+        title: 'Angular',
+        category: [57]
+      }
+      console.log('debug1')
+      const headers = {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+      console.log('debog2')
+      const response = await Axios.post(URL, body, { headers })
+      console.log(response.data.items)
+      setBooks(response.data.items)
+    } catch (error) {}
   }
-  const searcher = (e) => {
-    setSearch(e.target.value)
-  }
-
   let results = []
   if (!search) {
-    results = name
+    results = books
   } else {
-    results = name.filter((dato) => dato.name.toLowerCase().includes(search.toLowerCase()))
+    results = books.filter((dato) => dato.title.toLowerCase().includes(search.toLowerCase()))
+  }
+
+  const searcher = (e) => {
+    setSearch(e.target.value)
   }
 
   useEffect(() => {
@@ -31,7 +41,7 @@ export const GetData = () => {
 
   return (
     <>
-      <form className="form-search">
+      <fom className="form-search">
         <placeholder className="form-title">Tus libros</placeholder>
         <input
           value={search}
@@ -40,15 +50,15 @@ export const GetData = () => {
           placeholder="🔍 Ej. Angular, React"
           onChange={searcher}
         />
-      </form>
+      </fom>
       <section>
         <tbody className="card">
-          {/*results.map((name) => (
-            <tr key={name.id}>
-              <td>{name.title}</td>
-              <td>{name.image}</td>
+          {results.map((book) => (
+            <tr key={book.id}>
+              {/* <td>{book.title}</td>*/}
+              <img alt="" className="img-book" src={book.image} />
             </tr>
-          ))*/}
+          ))}
         </tbody>
       </section>
     </>

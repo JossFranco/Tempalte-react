@@ -1,8 +1,21 @@
 import './Form.css'
 import { Button } from '../../atoms/Button/Button'
 import { useState } from 'react'
-import db from '../../../database/Database.json'
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
+
+const login = async (user, password) => {
+  try {
+    const URL = 'https://cangular-api.herokuapp.com/users/login'
+    const data = {
+      username: user,
+      password
+    }
+    const response = await Axios.post(URL, data)
+    console.log('response', response)
+    return response.data
+  } catch (error) {}
+}
 
 export default function Form({ navigateFunction, locationFunction }) {
   const [email, setEmail] = useState('')
@@ -11,9 +24,7 @@ export default function Form({ navigateFunction, locationFunction }) {
   const [errorPwd, setErrorPwd] = useState('')
   const [err, setErr] = useState('')
 
-  const handleSubmit = () => {
-    const users = db.user.map((x) => x.email)
-    const pwds = db.user.map((x) => x.password)
+  const handleSubmit = async () => {
     setErrorUser('')
     setErrorPwd('')
     setErr('')
@@ -23,7 +34,12 @@ export default function Form({ navigateFunction, locationFunction }) {
     if (password === '') {
       setErrorPwd('Campo es requerido')
     }
-    if (users.includes(email) && pwds.includes(password)) {
+
+    const dataUser = await login(email, password)
+
+    if (dataUser) {
+      localStorage.setItem('token', dataUser.access_token)
+      localStorage.setItem('typeToken', dataUser.tokenType)
       navigateFunction('/home')
     } else {
       setErr('Los datos son incorrectos')

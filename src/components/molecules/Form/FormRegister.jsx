@@ -72,7 +72,7 @@ export default function FormRegister({ navigateFunction }) {
       />
       <span>{errorPwd}</span>
       <br></br>
-      <label htmlFor="pwdConfirm">Contraseña</label>
+      <label htmlFor="pwdConfirm">Confirmar Contraseña</label>
       <input
         onChange={(ev) => setPwdConfirm(ev.target.value)}
         type="password"
