@@ -1,16 +1,85 @@
-import React from 'react'
-import Form from '../../components/molecules/Form/Form'
+import React, { useEffect } from 'react'
+import { Input } from '../../components/atoms/Input/Input'
+import { Button } from '../../components/atoms/Button/Button'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import Axios from 'axios'
+import { UserService } from '../../services/user.service'
 import './Login.css'
 
 export const Login = ({ navigateFunction, locationFunction }) => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorUser, setErrorUser] = useState('')
+  const [errorPwd, setErrorPwd] = useState('')
+  const [err, setErr] = useState('')
+
+  useEffect(() => {
+    if (email.length <= 5 && email.length > 0) {
+      setErrorUser('Minimo 5 caracteres')
+    } else {
+      setErrorUser('')
+    }
+    if (email.length <= 5 && email.length > 0) {
+      setErrorPwd('Minimo 5 caracteres')
+    } else {
+      setErrorPwd('')
+    }
+  }, [email, password])
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setErr('')
+
+    try {
+      const dataUser = await UserService.login({ email, password })
+      if (dataUser) {
+        localStorage.setItem('token', dataUser.access_token)
+        localStorage.setItem('typeToken', dataUser.tokenType)
+        navigateFunction('/home')
+      } else {
+        setErr('Los datos son incorrectos')
+      }
+    } catch (error) {
+      setErr('Ha ocurrido un error.')
+    }
+  }
+
   return (
-    <>
-      <div className="Login">
-        <main className="Login-header">
-          <h1> Iniciar sesión </h1>
-          <Form navigateFunction={navigateFunction} locationFuntion={locationFunction}></Form>
-        </main>
-      </div>
-    </>
+    <div className="Login">
+      <main className="Login-header">
+        <h1> Iniciar sesión </h1>
+        <form className="userForm">
+          <Input
+            onChange={(ev) => setEmail(ev.target.value)}
+            type="text"
+            id="userEmail"
+            value={email}
+            placeholder="Ej. name@example.com"
+            labelMessage="Correo electronico"
+            errorMessage={errorUser}
+          />
+
+          <Input
+            onChange={(ev) => setPassword(ev.target.value)}
+            type="password"
+            name="password"
+            id="userPassword"
+            value={password}
+            placeholder="*****"
+            errorMessage={errorPwd}
+            labelMessage="Contraseña"
+          />
+
+          <div className="optionRegister">
+            <Link to={'/register'}> Registrate aquí </Link>
+            <Button size="small" onClick={(event) => handleSubmit(event)} color="primary">
+              Ingresar
+            </Button>
+          </div>
+          <span>{err}</span>
+        </form>
+      </main>
+    </div>
   )
 }

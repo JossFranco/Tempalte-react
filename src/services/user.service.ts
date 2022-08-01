@@ -11,10 +11,18 @@ export interface User {
   email: string
   token: string
 }
-
+export interface DataLogin {
+  username: string
+  password: string
+}
 export class UserService {
   static async getUsers() {
     const response = await axios.get<User[]>(API_URL)
+    return response.data
+  }
+
+  static async login(data: DataLogin) {
+    const response = await axios.post(API_URL, data)
     return response.data
   }
 }
