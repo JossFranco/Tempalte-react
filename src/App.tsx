@@ -1,15 +1,22 @@
-import React from 'react'
 import './App.css'
-import { Button } from './components/atoms/Button/Button'
+import { Routes, Route } from 'react-router-dom'
+import { Login } from './page/Login/Login'
+import { Register } from './page/Register/Register'
+import { Home } from './page/Home/Home'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-function App() {
+export function App() {
+  const navigate = useNavigate()
+  const location = useLocation()
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Onboard Express</h1>
-      </header>
-      <Button color="primary">Hazme click</Button>
-    </div>
+    <Routes>
+      <Route path="/" element={<Login navigateFunction={navigate} locationFunction={location} />} />
+      <Route
+        path="Register"
+        element={<Register navigateFunction={navigate} locationFunction={location} />}
+      />
+      <Route path="Home" element={<Home />} />
+    </Routes>
   )
 }
 
