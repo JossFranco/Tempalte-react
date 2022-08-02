@@ -1,6 +1,7 @@
-import Axios from 'axios'
+/* import Axios from 'axios'
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { Input } from '../../atoms/Input/Input'
 import './GetData.css'
 
 export const GetData = () => {
@@ -8,17 +9,14 @@ export const GetData = () => {
   const [books, setBooks] = useState([])
   const getBooks = async () => {
     try {
-      console.log('entro')
       const URL = 'https://cangular-api.herokuapp.com/books/filter'
       const body = {
-        title: 'Angular',
-        category: [57]
+        title: '',
+        category: []
       }
-      console.log('debug1')
       const headers = {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       }
-      console.log('debog2')
       const response = await Axios.post(URL, body, { headers })
       console.log(response.data.items)
       setBooks(response.data.items)
@@ -42,20 +40,20 @@ export const GetData = () => {
   return (
     <>
       <fom className="form-search">
-        <placeholder className="form-title">Tus libros</placeholder>
-        <input
-          value={search}
-          type="text"
+        <Input
           className="formInput"
-          placeholder="🔍 Ej. Angular, React"
           onChange={searcher}
+          type="text"
+          id="formInput"
+          value={search}
+          placeholder="🔍 Ej. Angular, React"
+          labelMessage="Usuario"
         />
       </fom>
       <section>
         <tbody className="card">
           {results.map((book) => (
             <tr key={book.id}>
-              {/* <td>{book.title}</td>*/}
               <img alt="" className="img-book" src={book.image} />
             </tr>
           ))}
@@ -64,3 +62,4 @@ export const GetData = () => {
     </>
   )
 }
+ */

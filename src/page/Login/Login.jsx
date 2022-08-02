@@ -3,7 +3,6 @@ import { Input } from '../../components/atoms/Input/Input'
 import { Button } from '../../components/atoms/Button/Button'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Axios from 'axios'
 import { UserService } from '../../services/user.service'
 import './Login.css'
 
@@ -20,7 +19,7 @@ export const Login = ({ navigateFunction, locationFunction }) => {
     } else {
       setErrorUser('')
     }
-    if (email.length <= 5 && email.length > 0) {
+    if (password.length <= 5 && email.length > 0) {
       setErrorPwd('Minimo 5 caracteres')
     } else {
       setErrorPwd('')
@@ -30,9 +29,9 @@ export const Login = ({ navigateFunction, locationFunction }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     setErr('')
-
+    const userData = { username: email, password: password }
     try {
-      const dataUser = await UserService.login({ email, password })
+      const dataUser = await UserService.login(userData)
       if (dataUser) {
         localStorage.setItem('token', dataUser.access_token)
         localStorage.setItem('typeToken', dataUser.tokenType)

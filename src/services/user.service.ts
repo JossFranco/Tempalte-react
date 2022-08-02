@@ -15,6 +15,9 @@ export interface DataLogin {
   username: string
   password: string
 }
+export interface GetData{
+
+}
 export class UserService {
   static async getUsers() {
     const response = await axios.get<User[]>(API_URL)
@@ -22,7 +25,22 @@ export class UserService {
   }
 
   static async login(data: DataLogin) {
-    const response = await axios.post(API_URL, data)
+    const response = await axios.post(API_URL + 'users/login', data)
     return response.data
   }
-}
+
+  static async register(userName: string, email: string, password: string) {
+    const user = {
+      name: userName,
+      email: email,
+      password: password
+    }
+    const response = await axios.post(API_URL + 'users/', user)
+    return response.data
+  }
+  static async getBooks ()
+   const body = {
+    title: '',
+    category: []
+    }
+      const response = await axios.post(API_URL + body )
