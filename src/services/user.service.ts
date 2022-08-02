@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const API_URL = process.env.REACT_APP_API_URL as string
-const API_URL_FILTER = process.env.REACT_APP_API_URL_FILTER as string
 
 export interface FirebaseWrapper<T> {
   data: T
@@ -19,6 +18,7 @@ export interface DataLogin {
 export interface GetData {
   title: string
   category: string
+  image: string
 }
 export class UserService {
   static async getUsers() {
@@ -41,12 +41,17 @@ export class UserService {
     return response.data
   }
 
-  static async home(title: string, category: string) {
-    const body = {
-      title: title,
-      category: category
-    }
-    const response = await axios.post(API_URL_FILTER + '/body', body)
+  static async home() {
+    const response = await axios.post(
+      API_URL + 'books/filter',
+      {},
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6Inc3cWZzYTVmMjEiLCJ1c2VybmFtZSI6ImtzdWFyZXoifSwiaWF0IjoxNjU0Mzc1MDE1LCJleHAiOjE2NTQzOTY2MTV9.AeX_NtUGoCEv7LKw8hijQI3shuCpoIatQBtdQUkgWj0'
+        }
+      }
+    )
     return response.data
   }
 }

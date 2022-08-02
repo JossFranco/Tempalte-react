@@ -1,11 +1,11 @@
-// eslint-disable-next-line jest/no-commented-out-tests
-/* import FormRegister from './FormRegister'
+import React from 'react'
+import '@testing-library/jest-dom/extend-expect'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
+import Register from './Register'
 
-describe('FormRegister', () => {
+describe('Register', () => {
   const navigateFuntion = jest.fn()
   const locationFunction = jest.fn()
 
@@ -13,11 +13,10 @@ describe('FormRegister', () => {
     const history = createMemoryHistory()
     render(
       <Router location={history.location} navigator={history}>
-        <FormRegister navigateFunction={navigateFuntion} locationFunction={locationFunction} />
+        <Register navigateFunction={navigateFuntion} locationFunction={locationFunction} />
       </Router>
     )
     const text = screen.getByText(/Iniciar sesión/i)
     expect(text).toBeInTheDocument()
   })
 })
- */

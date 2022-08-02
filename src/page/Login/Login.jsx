@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { UserService } from '../../services/user.service'
 import './Login.css'
 
-export const Login = ({ navigateFunction, locationFunction }) => {
+export const Login = ({ navigateFunction }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorUser, setErrorUser] = useState('')
@@ -71,7 +71,7 @@ export const Login = ({ navigateFunction, locationFunction }) => {
             labelMessage="Contraseña"
             className="inputLogin"
           />
-
+          <br></br>
           <div className="optionRegister">
             <Link to={'/register'}> Registrate aquí </Link>
             <Button size="small" onClick={(event) => handleSubmit(event)} color="primary">

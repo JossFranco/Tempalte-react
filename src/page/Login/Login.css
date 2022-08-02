@@ -20,19 +20,31 @@ h1 {
     display: flex;
     flex-direction: column;
 }
-.inputLogin input {
+.userForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.userForm input {
         padding: 10px;
         border-radius: 3px;
         border: 1px solid #CEE5D0 
 }
-
 .optionRegister{
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.inputLogin {
-
+.optionRegister input {
+padding: 10px;
+border-radius: 3px;
+border: 1px solid #CEE5D0
 }
-u.serEmail{
-
+span{
+    color: red;
+}
+.input{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
 }

@@ -11,10 +11,11 @@ export const Home = () => {
 
   const getBooks = async () => {
     try {
-      const dataHome = await UserService.get.post(title, category)
-      setBooks(dataHome)
+      const dataHome = await UserService.home()
+      setBooks(dataHome.items)
     } catch (error) {}
   }
+
   let results = []
   if (!search) {
     results = books
@@ -32,7 +33,7 @@ export const Home = () => {
 
   return (
     <>
-      <fom className="form-search">
+      <form className="form-search">
         <NavBar />
         <Input
           className="formInput"
@@ -41,14 +42,14 @@ export const Home = () => {
           id="formInput"
           value={search}
           placeholder="🔍 Ej. Angular, React"
-          labelMessage="Usuario"
+          labelMessage="Tus libros"
         />
-      </fom>
+      </form>
       <section>
         <tbody className="card">
           {results.map((book) => (
             <tr key={book.id}>
-              <img alt="" className="img-book" src={book.image} />
+              <img alt="" with="10%" height="10%" className="img-book" src={book.image} />
             </tr>
           ))}
         </tbody>
