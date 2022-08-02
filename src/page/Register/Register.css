@@ -17,8 +17,7 @@
 .Register-header{
     width: 20%;
     padding: 20px;
-    border: 1px solid #CEE5D0
-    ;
+    border: 1px solid #CEE5D0;
 }
 h1 {
     border-bottom: 1px solid #CEE5D0;
@@ -42,4 +41,9 @@ h1 {
 }
 span{
     color: red
+}
+.input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const API_URL = process.env.REACT_APP_API_URL as string
+const API_URL_FILTER = process.env.REACT_APP_API_URL_FILTER as string
 
 export interface FirebaseWrapper<T> {
   data: T
@@ -15,8 +16,9 @@ export interface DataLogin {
   username: string
   password: string
 }
-export interface GetData{
-
+export interface GetData {
+  title: string
+  category: string
 }
 export class UserService {
   static async getUsers() {
@@ -38,9 +40,13 @@ export class UserService {
     const response = await axios.post(API_URL + 'users/', user)
     return response.data
   }
-  static async getBooks ()
-   const body = {
-    title: '',
-    category: []
+
+  static async home(title: string, category: string) {
+    const body = {
+      title: title,
+      category: category
     }
-      const response = await axios.post(API_URL + body )
+    const response = await axios.post(API_URL_FILTER + '/body', body)
+    return response.data
+  }
+}

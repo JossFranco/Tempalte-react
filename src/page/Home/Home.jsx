@@ -1,26 +1,18 @@
 import React from 'react'
 import NavBar from '../../components/molecules/NavBar/NavBar'
-import Axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Input } from '../../components/atoms/Input/Input'
+import { UserService } from '../../services/user.service'
 import './Home.css'
 
 export const Home = () => {
   const [search, setSearch] = useState('')
   const [books, setBooks] = useState([])
+
   const getBooks = async () => {
     try {
-      const URL = 'https://cangular-api.herokuapp.com/books/filter'
-      const body = {
-        title: '',
-        category: []
-      }
-      const headers = {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      }
-      const response = await Axios.post(URL, body, { headers })
-      console.log(response.data.items)
-      setBooks(response.data.items)
+      const dataHome = await UserService.get.post(title, category)
+      setBooks(dataHome)
     } catch (error) {}
   }
   let results = []

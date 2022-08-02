@@ -1,11 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
 .Login{
     width: 100vw;
     height: 100vh;
@@ -17,10 +9,30 @@
 .Login-header{
     width: 20%;
     padding: 20px;
-    border: 1px solid #CEE5D0
-    ;
+    border: 1px solid #CEE5D0;
 }
 h1 {
     border-bottom: 1px solid #CEE5D0;
     margin-bottom: 20px;
+}
+.userEmail{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.inputLogin input {
+        padding: 10px;
+        border-radius: 3px;
+        border: 1px solid #CEE5D0 
+}
+
+.optionRegister{
+    display: flex;
+    justify-content: space-between;
+}
+.inputLogin {
+
+}
+u.serEmail{
+
 }

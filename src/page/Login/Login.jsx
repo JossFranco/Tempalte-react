@@ -57,6 +57,7 @@ export const Login = ({ navigateFunction, locationFunction }) => {
             placeholder="Ej. name@example.com"
             labelMessage="Correo electronico"
             errorMessage={errorUser}
+            className="inputLogin"
           />
 
           <Input
@@ -68,6 +69,7 @@ export const Login = ({ navigateFunction, locationFunction }) => {
             placeholder="*****"
             errorMessage={errorPwd}
             labelMessage="Contraseña"
+            className="inputLogin"
           />
 
           <div className="optionRegister">
