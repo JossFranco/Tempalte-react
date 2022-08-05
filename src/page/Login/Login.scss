@@ -1,41 +1,33 @@
-.Register{
+.Login{
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.Register-header{
-    width: 20%;
-    padding: 20px;
-    border: 1px solid #CEE5D0;
-}
-h1 {
+    border: 1px solid #CEE5D0
+
+&__Login-header{
+        width: 20%;
+        padding: 20px;
+        border: 1px solid #CEE5D0;
+        
+    }
+&__title{
     border-bottom: 1px solid #CEE5D0;
     margin-bottom: 20px;
 }
-
-.form-register {
+&__user-form{
     width: 100%;
     display: flex;
     flex-direction: column;
 }
-.form-register input {
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid #CEE5D0
-
-}
-.optionLogin{
+&__option-register{
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
-span{
-    color: red
+&__span{
+    color: red;
 }
-.input{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
 }

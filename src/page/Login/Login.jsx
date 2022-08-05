@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Input } from '../../components/atoms/Input/Input'
 import { Button } from '../../components/atoms/Button/Button'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserService } from '../../services/user.service'
-import './Login.css'
+import './Login.scss'
 
-export const Login = ({ navigateFunction }) => {
+export function Login({ navigateFunction }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorUser, setErrorUser] = useState('')
@@ -14,6 +13,7 @@ export const Login = ({ navigateFunction }) => {
   const [err, setErr] = useState('')
 
   useEffect(() => {
+    setErr('')
     if (email.length <= 5 && email.length > 0) {
       setErrorUser('Minimo 5 caracteres')
     } else {
@@ -26,8 +26,7 @@ export const Login = ({ navigateFunction }) => {
     }
   }, [email, password])
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
+  const handleSubmit = async () => {
     setErr('')
     const userData = { username: email, password: password }
     try {
@@ -46,9 +45,9 @@ export const Login = ({ navigateFunction }) => {
 
   return (
     <div className="Login">
-      <main className="Login-header">
-        <h1> Iniciar sesión </h1>
-        <form className="userForm">
+      <main className="Login__header">
+        <h1 className="Login__title"> Iniciar sesión </h1>
+        <form className="Login__user-form">
           <Input
             onChange={(ev) => setEmail(ev.target.value)}
             type="text"
@@ -72,13 +71,13 @@ export const Login = ({ navigateFunction }) => {
             className="inputLogin"
           />
           <br></br>
-          <div className="optionRegister">
+          <div className="Login__option-register">
             <Link to={'/register'}> Registrate aquí </Link>
-            <Button size="small" onClick={(event) => handleSubmit(event)} color="primary">
+            <Button size="small" onClick={() => void handleSubmit()} color="primary">
               Ingresar
             </Button>
           </div>
-          <span>{err}</span>
+          <span className="Login__span">{err}</span>
         </form>
       </main>
     </div>

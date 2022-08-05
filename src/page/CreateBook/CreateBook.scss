@@ -1,0 +1,32 @@
+.create-book{
+    display: flex;
+    flex-direction: column;
+    &__title{
+        margin: 0px 15px ;
+    }
+    &__container-inputs{
+        display: flex;
+        margin: 15px 35px;
+        width: 100%;
+        justify-content:space-evenly;
+    }
+    &newBook__inputs{
+        width: 50%;
+    }
+    &__container-checkbox{
+        display: grid;
+        grid-template-columns: repeat(5);
+        margin: 0px 15px;
+    }
+    &__buttons-container{
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 80px;
+
+    }
+    &__button{
+        margin-left: 20px;
+        width: 100px;
+    }
+    
+}

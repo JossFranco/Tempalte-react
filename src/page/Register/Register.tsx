@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, FC } from 'react'
 import { Input } from '../../components/atoms/Input/Input'
 import { Button } from '../../components/atoms/Button/Button'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { UserService } from '../../services/user.service'
-import './Register.css'
-
-export const Register = ({ navigateFunction, locationFunction }) => {
+export interface RegisterProps {
+  navigateFunction: (value: string) => void
+}
+export const Register: FC<RegisterProps> = (props: RegisterProps) => {
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [errorEmail, setErrorEmail] = useState('')
@@ -18,7 +17,7 @@ export const Register = ({ navigateFunction, locationFunction }) => {
   const [err, setErr] = useState('')
 
   useEffect(() => {
-    if (userName.length <= 5 && userName > 0) {
+    if (userName.length <= 5 && userName.length > 0) {
       setErrorUser('Minimo 5 caracteres')
     } else {
       setErrorUser('')
@@ -28,25 +27,33 @@ export const Register = ({ navigateFunction, locationFunction }) => {
     } else {
       setErrorEmail('')
     }
-    if (password.length <= 5 && password.length > 0) {
-      setErrorPwd('Campo requerido, minimo 5 caracteres')
-    } else {
-      setErrorPwd('')
-    }
-    if (pwdConfirm.length <= 5 && pwdConfirm.length > 0) {
-      setErrPwdConfirm('Campo requerido, minimo 5 caracteres')
+    if (password !== pwdConfirm) {
+      setErrorPwd('Las contraseñas deben coincidir')
+      setPwdConfirm('las contraseñas deben coincidir')
     } else {
       setErrPwdConfirm('')
+      setErrorPwd('')
     }
   }, [userName, email, password, pwdConfirm])
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
+  const handleSubmit = async () => {
     setErr('')
+    if (!userName) {
+      setErrorUser('Campo requerido')
+    }
+    if (!email) {
+      setErrorEmail('Campo requerido')
+    }
+    if (!password) {
+      setErrorPwd('Campo requerido')
+    }
+    if (!pwdConfirm) {
+      setErrPwdConfirm('Campo requerido')
+    }
     try {
-      const dataRegister = await UserService.register(userName, email, password)
+      const dataRegister = await UserService.createUser(userName, email, password)
       if (dataRegister) {
-        navigateFunction('/')
+        props.navigateFunction('/')
       } else {
         setErr('Los datos son incorrectos')
       }
@@ -104,8 +111,7 @@ export const Register = ({ navigateFunction, locationFunction }) => {
             />
             <br></br>
             <div className="optionLogin">
-              <Link to={'/'}> Registrate aquí </Link>
-              <Button size="small" onClick={(event) => handleSubmit(event)} color="primary">
+              <Button size="small" onClick={() => handleSubmit()} color="primary">
                 Registrar
               </Button>
             </div>
